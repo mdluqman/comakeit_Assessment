@@ -8,7 +8,7 @@
 <%
 String username=(String)session.getAttribute("username");%>
 </head>
-<body bgcolor="orange"><center>
+<body bgcolor="#45B39D"><center>
 <h1>WELCOME <%=username %></h1>
 you can perform the following
 <!-- <input type="hidden" name="username" value=<%=username %>> -->

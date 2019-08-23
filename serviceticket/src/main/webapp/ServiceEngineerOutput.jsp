@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>VIEW TICKETS</title>
 </head>
 <%
 	Integer ch = (Integer) request.getAttribute("ch");

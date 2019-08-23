@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ADMIN HOMEPAGE</title>
 </head>
 <%
 String message = (String)request.getParameter("message");
@@ -21,7 +21,7 @@ if(message!=null)
 <a href="AdminServlet?value=View" >View Users/Clients</a><br/><br/><br/>
 
 </div>
-<form action="AdminServlet" method="POST">
+<form action="Login.jsp" method="POST">
 	<input type="submit" value="Logout">
 	</form>
 </body>

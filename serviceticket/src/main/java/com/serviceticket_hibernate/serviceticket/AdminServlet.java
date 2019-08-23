@@ -27,7 +27,7 @@ import BeanClasses.usertypeinfo;
 
 public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	AdminBusinessclass abc=new AdminBusinessclass();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -80,12 +80,12 @@ public class AdminServlet extends HttpServlet {
 				rd.forward(request, response);
 			}
 		}else if (clientrequest.equals("Register")) {
-			List<deptInfo> departments = getdept();
+			List<deptInfo> departments = abc.getdept();
 			RequestDispatcher rd = request.getRequestDispatcher("Registration.jsp");
 			request.setAttribute("dept", departments);
 			rd.forward(request, response);
 		} else if (clientrequest.equals("View")) {
-			List<usertypeinfo> user = getusertype();
+			List<usertypeinfo> user = abc.getusertype();
 			RequestDispatcher rd = request.getRequestDispatcher("AdminOutput.jsp");
 			request.setAttribute("usertype", user);
 			request.setAttribute("usertypeid", "5");
@@ -94,32 +94,32 @@ public class AdminServlet extends HttpServlet {
 			int usertypeid = Integer.parseInt(request.getParameter("usertype"));
 			System.out.println("usertypeid is:" + usertypeid);
 			if (usertypeid == 1) {
-				List<Bean> user = getuser();
-				List<usertypeinfo> usertype = getusertype();
+				List<Bean> user = abc.getuser();
+				List<usertypeinfo> usertype = abc.getusertype();
 				RequestDispatcher rd = request.getRequestDispatcher("AdminOutput.jsp");
 				request.setAttribute("users", user);
 				request.setAttribute("usertype", usertype);
 				request.setAttribute("usertypeid", "1");
 				rd.forward(request, response);
 			} else if (usertypeid == 2) {
-				List<ServiceEngineerBean> serviceengineer = getserviceengineer();
+				List<ServiceEngineerBean> serviceengineer = abc.getserviceengineer();
 				for(int i=0;i<serviceengineer.size();i++)
 				{
 					System.out.println(serviceengineer.get(i).getSEusername().getUsername());
 				}
-				List<usertypeinfo> usertype = getusertype();
+				List<usertypeinfo> usertype = abc.getusertype();
 				RequestDispatcher rd = request.getRequestDispatcher("AdminOutput.jsp");
 				request.setAttribute("serviceengineer", serviceengineer);
 				request.setAttribute("usertype", usertype);
 				request.setAttribute("usertypeid", "2");
 				rd.forward(request, response);
 			} else if (usertypeid == 3) {
-				List<Bean> user = getuser();
+				List<Bean> user = abc.getuser();
 				for(int i=0;i<user.size();i++)
 				{
 					System.out.println(user.get(i).getUsername());
 				}
-				List<usertypeinfo> usertype = getusertype();
+				List<usertypeinfo> usertype = abc.getusertype();
 				RequestDispatcher rd = request.getRequestDispatcher("AdminOutput.jsp");
 				request.setAttribute("users", user);
 				request.setAttribute("usertype", usertype);
@@ -169,45 +169,6 @@ public class AdminServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public List<deptInfo> getdept() {
-		Client client = ClientBuilder.newClient(new ClientConfig());
-		WebTarget webTarget = client.target("http://localhost:8080/serviceticket/webapi/EndUser").path("raise");
-		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-		Response res = invocationBuilder.get();
-		List<deptInfo> departments = res.readEntity(new GenericType<List<deptInfo>>() {
-		});
-		return departments;
-	}
-
-	public List<Bean> getuser() {
-		Client client = ClientBuilder.newClient(new ClientConfig());
-		WebTarget webTarget = client.target("http://localhost:8080/serviceticket/webapi/AdminRest").path("getuser");
-		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-		Response res = invocationBuilder.get();
-		List<Bean> user = res.readEntity(new GenericType<List<Bean>>() {
-		});
-		return user;
-	}
-
-	public List<usertypeinfo> getusertype() {
-		Client client = ClientBuilder.newClient(new ClientConfig());
-		WebTarget webTarget = client.target("http://localhost:8080/serviceticket/webapi/AdminRest").path("getusertype");
-		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-		Response res = invocationBuilder.get();
-		List<usertypeinfo> user = res.readEntity(new GenericType<List<usertypeinfo>>() {
-		});
-		return user;
-	}
-
-	public List<ServiceEngineerBean> getserviceengineer() {
-		Client client = ClientBuilder.newClient(new ClientConfig());
-		WebTarget webTarget = client.target("http://localhost:8080/serviceticket/webapi/AdminRest")
-				.path("getserviceengineer");
-		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-		Response res = invocationBuilder.get();
-		List<ServiceEngineerBean> user = res.readEntity(new GenericType<List<ServiceEngineerBean>>() {
-		});
-		return user;
-	}
+	
 
 }

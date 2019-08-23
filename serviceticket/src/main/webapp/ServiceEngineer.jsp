@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>SERVICE-ENGINEER HOMEPAGE</title>
 </head>
 <%
 String username=(String)session.getAttribute("username");
 %>
-<body bgcolor="cyan">
+<body bgcolor="#45B39D">
 <CENTER>
 <h1>WELCOME <%=username %> SERVICE_ENGINEER</h1>
 you can perform the following<br/><br/><br/>

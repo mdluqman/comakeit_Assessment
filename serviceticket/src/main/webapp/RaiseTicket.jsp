@@ -14,7 +14,7 @@
 <title>Raising Ticket</title>
 
 </head>
-<body bgcolor="dodge blue">
+<body >
 <%
 Integer ch=(Integer)request.getAttribute("ch");
 List<deptInfo> dept=(List<deptInfo>)request.getAttribute("dept");
@@ -27,7 +27,7 @@ else if(ch==8)
 	out.println("kindly enter a valid REQUESTED-END-DATE");
 }
 %>
-<center><div style="background-color:#F4D03F;width:800px; margin:0 auto;" >
+<center><div style="background-color:#DC7633;width:800px; margin:0 auto;" >
 <h1>Raise Ticket</h1> 
 <form action="EndUserServlet" name="RaiseTicket" method="post">
  Department*:    <select name="dept">   
